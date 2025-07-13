@@ -164,3 +164,29 @@ const windowResize = (event) => {
 
 window.addEventListener('mousemove', mouseMove);
 window.addEventListener('resize', windowResize);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const placeholder = document.getElementById("globe-placeholder");
+  if (!placeholder) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    if (entries[0].isIntersecting) {
+      const iframe = document.createElement('iframe');
+      iframe.src = "https://globe-visilean.vercel.app/";
+      iframe.width = "100%";
+      iframe.height = "140%";
+      iframe.style.border = "none";
+      iframe.style.borderRadius = "12px";
+      iframe.loading = "lazy";
+      iframe.allowFullscreen = true;
+
+      placeholder.appendChild(iframe);
+      obs.disconnect(); // Only load once
+    }
+  }, {
+    root: null,
+    threshold: 0.1
+  });
+
+  observer.observe(placeholder);
+});
