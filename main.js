@@ -275,5 +275,4 @@ function initSpotlightEffect(selector) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initSpotlightEffect('.project-card');
-  initSpotlightEffect('.skill-item');
 });
