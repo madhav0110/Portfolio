@@ -133,9 +133,9 @@ html{
     --static-heading-gradient-blue:#0f7878;
     --static-heading-gradient-pink:#f09bb9;
     --color-shadowDark:#e2ddd7;
-    --tech-stack-box-first-color:#e7e2db;
-    --tech-stack-box-second-color:#ece7e100;
-    --tech-stack-box-border-color:#dad5cf
+    --tech-stack-box-first-color:#f8f2ea;
+    --tech-stack-box-second-color:#e6ddd2;
+    --tech-stack-box-border-color:#cfc6ba
 }
 .setting-container{
     width:60px;
@@ -866,7 +866,8 @@ noscript{
     position:relative;
     border:1px solid var(--tech-stack-box-border-color);
     border-radius:30px;
-    transition:transform .3s ease,border-color .3s ease
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+    transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease
 }
 .tech-stack-box:focus{
     outline:2px solid var(--color-light-purple);
@@ -874,7 +875,8 @@ noscript{
 }
 .tech-stack-box:hover{
     transform:translateY(-8px);
-    border-color:var(--color-light-purple)
+    border-color:var(--color-light-purple);
+    box-shadow:0 24px 50px rgba(207,89,230,.22)
 }
 .tech-stack-logo{
     width:80%;
@@ -889,7 +891,7 @@ noscript{
     opacity:0;
     pointer-events:none;
     white-space:nowrap;
-    background:var(--color-dark-mode);
+    background:linear-gradient(to bottom right,var(--tech-stack-box-first-color),var(--tech-stack-box-second-color));
     border:1px solid var(--tech-stack-box-border-color);
     border-radius:10px;
     padding:8px 12px;
@@ -904,9 +906,11 @@ noscript{
     opacity:1;
     transform:translateX(-50%) translateY(0)
 }
-.light-mode .tooltip{
-    background:var(--color-white);
-    color:#000
+.light-mode .tech-stack-box{
+    box-shadow:0 18px 40px rgba(89,70,48,.12)
+}
+.light-mode .tech-stack-box:hover{
+    box-shadow:0 24px 50px rgba(207,89,230,.18)
 }
 @media screen and (max-width:768px){
     .tech-stack-wrapper{
@@ -1115,7 +1119,7 @@ footer{
     justify-content:center;
     backdrop-filter:blur(10px);
     z-index:2;
-    padding:80px 0 40px
+    padding:80px 0 0
 }
 .footercontainer{
     width:100%;
