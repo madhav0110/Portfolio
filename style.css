@@ -848,80 +848,102 @@ noscript{
 .project-box,.tech-stack-box{
     background-image:linear-gradient(to bottom right,var(--tech-stack-box-first-color),var(--tech-stack-box-second-color))
 }
-.skills-grid,.tech-stack-wrapper{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
-    gap:16px;
-    list-style:none;
-    padding:0;
-    margin:0
+/* Grid container */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 14px;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
 }
-.skill-item{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    padding:20px 12px;
-    border-radius:14px;
-    cursor:default;
-    text-align:center;
-    position:relative;
-    isolation:isolate;
-    --mouse-x:-999px;
-    --mouse-y:-999px;
-    background:rgba(255, 255, 255, .06);
-    border:1px solid rgba(255, 255, 255, .1);
-    transition:transform .2s ease,border-color .2s ease
+
+/* Individual skill card */
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 12px;
+    border-radius: 14px;
+    cursor: default;
+    text-align: center;
+    position: relative;
+    isolation: isolate;
+    --mouse-x: -999px;
+    --mouse-y: -999px;
+    /* Dark card — default (site is dark by default) */
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
-.light-mode .skill-item{
-    background:rgba(0, 0, 0, .04);
-    border:1px solid rgba(0, 0, 0, .08)
+
+/* Hover lift */
+.skill-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.22);
 }
-.skill-item:hover{
-    transform:translateY(-3px);
-    border-color:rgba(255, 255, 255, .2)
+
+/* Logo — fixed size so ALL cards are equal height */
+.skill-item img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
 }
-.light-mode .skill-item:hover{
-    border-color:rgba(0, 0, 0, .15)
+
+/* Label */
+.skill-item span {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.65);
+    position: relative;
+    z-index: 1;
 }
-.skill-item img{
-    width:44px;
-    height:44px;
-    object-fit:contain;
-    flex-shrink:0
+
+/* Light / day theme overrides */
+.light-mode .skill-item {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.09);
 }
-.skill-item span{
-    font-size:12px;
-    font-weight:500;
-    letter-spacing:.03em;
-    color:rgba(255, 255, 255, .75)
+
+.light-mode .skill-item:hover {
+    border-color: rgba(0, 0, 0, 0.18);
 }
-.light-mode .skill-item span{
-    color:rgba(0, 0, 0, .7)
+
+.light-mode .skill-item span {
+    color: rgba(0, 0, 0, 0.65);
 }
-.skill-item::before{
-    content:"";
-    position:absolute;
-    inset:-1px;
-    border-radius:inherit;
-    background:radial-gradient(280px circle at var(--mouse-x) var(--mouse-y),rgba(255, 255, 255, .18),transparent 65%);
-    opacity:0;
-    transition:opacity .35s ease;
-    z-index:0;
-    pointer-events:none
+
+/* Spotlight glow layer */
+.skill-item::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: radial-gradient(
+        280px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.15),
+        transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 0;
+    pointer-events: none;
 }
-.skill-item:hover::before{
-    opacity:1
+
+.skill-item:hover::before {
+    opacity: 1;
 }
-.skill-item img,.skill-item span{
-    position:relative;
-    z-index:1
-}
-@media (hover: none){
-    .skill-item::before{
-        display:none
-    }
+
+/* Disable spotlight on touch */
+@media (hover: none) {
+    .skill-item::before { display: none; }
 }
 .cta,.cta span,.cta svg,.project-box,footer{
     position:relative
