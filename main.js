@@ -190,3 +190,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   observer.observe(placeholder);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contact-form");
+  const contactFormStatus = document.getElementById("contact-form-status");
+
+  if (!contactForm) return;
+
+  const emailJsPublicKey = contactForm.dataset.emailjsPublicKey;
+  if (window.emailjs && emailJsPublicKey && emailJsPublicKey !== "YOUR_PUBLIC_KEY") {
+    window.emailjs.init({ publicKey: emailJsPublicKey });
+  }
+
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm);
+    contactFormStatus.textContent = "Sending...";
+
+    const response = await fetch(contactForm.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    }).catch(() => null);
+
+    if (response && response.ok) {
+      contactForm.reset();
+      contactFormStatus.textContent = "Message sent successfully.";
+      return;
+    }
+
+    const serviceId = contactForm.dataset.emailjsServiceId;
+    const templateId = contactForm.dataset.emailjsTemplateId;
+    const canUseEmailJs = window.emailjs && serviceId !== "YOUR_SERVICE_ID" && templateId !== "YOUR_TEMPLATE_ID" && emailJsPublicKey !== "YOUR_PUBLIC_KEY";
+
+    if (canUseEmailJs) {
+      const templateParams = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        message: formData.get("message"),
+      };
+
+      const emailJsResponse = await window.emailjs.send(serviceId, templateId, templateParams).catch(() => null);
+      if (emailJsResponse) {
+        contactForm.reset();
+        contactFormStatus.textContent = "Message sent successfully.";
+        return;
+      }
+    }
+
+    contactFormStatus.textContent = "Formspree is unavailable. Please replace the placeholder form ID or EmailJS IDs.";
+  });
+});
