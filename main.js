@@ -192,55 +192,70 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const contactForm = document.getElementById("contact-form");
-  const contactFormStatus = document.getElementById("contact-form-status");
+  const overlay = document.getElementById("contactModalOverlay");
+  const openBtn = document.getElementById("openContactModal");
+  const closeBtn = document.getElementById("closeContactModal");
+  const form = document.getElementById("contactForm");
+  const submitBtn = document.getElementById("contactSubmitBtn");
+  const successMsg = document.getElementById("contactSuccess");
 
-  if (!contactForm) return;
+  if (!overlay || !openBtn || !closeBtn || !form || !submitBtn || !successMsg) return;
 
-  const emailJsPublicKey = contactForm.dataset.emailjsPublicKey;
-  if (window.emailjs && emailJsPublicKey && emailJsPublicKey !== "YOUR_PUBLIC_KEY") {
-    window.emailjs.init({ publicKey: emailJsPublicKey });
+  function openModal() {
+    overlay.classList.add("active");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    setTimeout(() => form.querySelector("input").focus(), 300);
   }
 
-  contactForm.addEventListener("submit", async (event) => {
+  function closeModal() {
+    overlay.classList.remove("active");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  openBtn.addEventListener("click", openModal);
+  closeBtn.addEventListener("click", closeModal);
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) closeModal();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && overlay.classList.contains("active")) closeModal();
+  });
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const formData = new FormData(contactForm);
-    contactFormStatus.textContent = "Sending...";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
 
-    const response = await fetch(contactForm.action, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json",
-      },
-    }).catch(() => null);
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
 
-    if (response && response.ok) {
-      contactForm.reset();
-      contactFormStatus.textContent = "Message sent successfully.";
-      return;
-    }
-
-    const serviceId = contactForm.dataset.emailjsServiceId;
-    const templateId = contactForm.dataset.emailjsTemplateId;
-    const canUseEmailJs = window.emailjs && serviceId !== "YOUR_SERVICE_ID" && templateId !== "YOUR_TEMPLATE_ID" && emailJsPublicKey !== "YOUR_PUBLIC_KEY";
-
-    if (canUseEmailJs) {
-      const templateParams = {
-        name: formData.get("name"),
-        email: formData.get("email"),
-        message: formData.get("message"),
-      };
-
-      const emailJsResponse = await window.emailjs.send(serviceId, templateId, templateParams).catch(() => null);
-      if (emailJsResponse) {
-        contactForm.reset();
-        contactFormStatus.textContent = "Message sent successfully.";
+      if (response.ok) {
+        form.reset();
+        successMsg.style.display = "block";
+        submitBtn.textContent = "Sent!";
+        setTimeout(() => {
+          successMsg.style.display = "none";
+          submitBtn.textContent = "Send Message";
+          submitBtn.disabled = false;
+          closeModal();
+        }, 2500);
         return;
       }
-    }
 
-    contactFormStatus.textContent = "Formspree is unavailable. Please replace the placeholder form ID or EmailJS IDs.";
+      submitBtn.textContent = "Failed — try again";
+      submitBtn.disabled = false;
+    } catch {
+      submitBtn.textContent = "Failed — try again";
+      submitBtn.disabled = false;
+    }
   });
 });
 
