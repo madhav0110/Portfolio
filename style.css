@@ -1637,7 +1637,7 @@ footer{
     border:3px solid var(--color-dark-mode);
     box-shadow:0 0 0 3px rgba(128,0,255,.22)
 }
-.experience-card-content,.patent-card,.contact-form{
+.experience-card-content,.patent-card{
     background-image:linear-gradient(to bottom right,var(--tech-stack-box-first-color),var(--tech-stack-box-second-color));
     border:1px solid var(--tech-stack-box-border-color);
     border-radius:24px
@@ -1655,7 +1655,7 @@ footer{
     font-size:1.8rem;
     margin-top:8px
 }
-.experience-period,.patent-badge{
+.experience-period{
     color:gray;
     font-size:1.5rem;
     margin-top:8px
@@ -1669,26 +1669,94 @@ footer{
 }
 .patent-cards{
     width:100%;
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:30px;
     margin-top:50px
 }
+.patents-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:start;
+    gap:24px
+}
 .patent-card{
+    display:flex;
+    flex-direction:column;
+    height:100%;
     padding:30px
 }
 .patent-badge{
-    display:inline-flex;
-    padding:8px 12px;
-    border-radius:999px;
-    border:1px solid var(--tech-stack-box-border-color);
-    background:rgba(128,0,255,.08)
+    display:inline-block;
+    margin-top:10px;
+    margin-bottom:14px;
+    padding:5px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:500;
+    background:rgba(167, 139, 250, .15);
+    color:#c4b5fd;
+    border:1px solid rgba(167, 139, 250, .3)
 }
-.patent-card p:last-child{
+.light-mode .patent-badge{
+    background:rgba(139, 92, 246, .12);
+    color:#5b21b6;
+    border:1px solid rgba(139, 92, 246, .25)
+}
+.patent-status.published{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    align-self:flex-start;
+    font-size:11px;
+    font-weight:500;
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:12px;
+    background:rgba(34, 197, 94, .1);
+    color:#86efac;
+    border:1px solid rgba(34, 197, 94, .2)
+}
+.light-mode .patent-status.published{
+    background:rgba(34, 197, 94, .12);
+    color:#15803d;
+    border:1px solid rgba(34, 197, 94, .25)
+}
+.patent-status.published::before{
+    content:"";
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:currentColor;
+    flex-shrink:0
+}
+.patent-card .patent-description{
+    flex:1;
     color:gray;
     font-size:1.6rem;
-    line-height:1.6;
-    margin-top:18px
+    line-height:1.6
+}
+.patent-journal-link{
+    display:inline-block;
+    align-self:flex-start;
+    margin-top:14px;
+    font-size:12px;
+    font-weight:500;
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:8px;
+    transition:background .2s ease,color .2s ease;
+    color:#c4b5fd;
+    background:rgba(167, 139, 250, .1);
+    border:1px solid rgba(167, 139, 250, .25)
+}
+.patent-journal-link:hover{
+    background:rgba(167, 139, 250, .18)
+}
+.light-mode .patent-journal-link{
+    color:#5b21b6;
+    background:rgba(139, 92, 246, .08);
+    border:1px solid rgba(139, 92, 246, .2)
+}
+.light-mode .patent-journal-link:hover{
+    background:rgba(139, 92, 246, .15)
 }
 .ProjectTech{
     color:var(--color-light-blue);
@@ -1701,34 +1769,67 @@ footer{
     display:flex;
     flex-direction:column;
     gap:14px;
-    padding:24px;
     margin:10px 0 25px
+}
+.contact-form-container{
+    padding:2rem;
+    background:rgba(255, 255, 255, .05);
+    border:1px solid rgba(255, 255, 255, .1);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-radius:16px
+}
+.light-mode .contact-form-container{
+    background:rgba(255, 255, 255, .6);
+    border:1px solid rgba(0, 0, 0, .08)
 }
 .contact-field-row{
     display:flex;
-    flex-direction:column;
-    gap:7px
+    flex-direction:column
 }
-.contact-field-row label{
-    color:#b3b3b3;
+.contact-form-container label{
+    color:rgba(255, 255, 255, .75);
     font-family:fira code;
-    font-size:1.4rem
+    font-size:13px;
+    font-weight:500;
+    margin-bottom:6px;
+    display:block
 }
-.contact-field-row input,.contact-field-row textarea{
+.light-mode .contact-form-container label{
+    color:#1a1a1a
+}
+.contact-form-container input,.contact-form-container textarea{
     width:100%;
-    border:1px solid var(--tech-stack-box-border-color);
-    border-radius:12px;
-    background:rgba(11,11,11,.55);
-    color:white;
-    font-size:1.5rem;
-    padding:13px 15px;
+    border:1px solid rgba(255, 255, 255, .12);
+    border-radius:10px;
+    background:rgba(255, 255, 255, .07);
+    color:#f0f0f0;
+    font-size:14px;
+    padding:12px 16px;
     outline:none;
     resize:vertical;
-    user-select:text
+    user-select:text;
+    transition:border-color .2s ease,background .2s ease
 }
-.contact-field-row input:focus,.contact-field-row textarea:focus{
-    border-color:var(--color-light-purple);
-    box-shadow:0 0 0 3px rgba(128,0,255,.18)
+.light-mode .contact-form-container input,.light-mode .contact-form-container textarea{
+    background:rgba(0, 0, 0, .05);
+    border:1px solid rgba(0, 0, 0, .12);
+    color:#1a1a1a
+}
+.contact-form-container input::placeholder,.contact-form-container textarea::placeholder{
+    color:rgba(255, 255, 255, .3)
+}
+.light-mode .contact-form-container input::placeholder,.light-mode .contact-form-container textarea::placeholder{
+    color:rgba(0, 0, 0, .35)
+}
+.contact-form-container input:focus,.contact-form-container textarea:focus{
+    border-color:rgba(167, 139, 250, .7);
+    background:rgba(255, 255, 255, .05);
+    outline:none
+}
+.light-mode .contact-form-container input:focus,.light-mode .contact-form-container textarea:focus{
+    border-color:rgba(139, 92, 246, .6);
+    background:rgba(0, 0, 0, .03)
 }
 .contact-form button{
     align-self:flex-start;
@@ -1750,7 +1851,7 @@ footer{
     .section-content-width{
         width:80%
     }
-    .patent-cards{
+    .patents-grid{
         grid-template-columns:1fr
     }
 }
@@ -1787,5 +1888,46 @@ footer{
 @media screen and (max-width:1400px){
     .navbar-tabs-ul{
         gap:28px
+    }
+}
+
+/* Spotlight cursor-tracking border glow */
+.project-card,
+.skill-item{
+    position:relative;
+    isolation:isolate;
+    --mouse-x:-999px;
+    --mouse-y:-999px;
+    --spotlight-glow-color:rgba(255, 255, 255, .12)
+}
+.light-mode .project-card,
+.light-mode .skill-item{
+    --spotlight-glow-color:rgba(99, 102, 241, .15)
+}
+.project-card::before,
+.skill-item::before{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:inherit;
+    background:radial-gradient(350px circle at var(--mouse-x) var(--mouse-y),var(--spotlight-glow-color),transparent 65%);
+    opacity:0;
+    transition:opacity .4s ease;
+    z-index:0;
+    pointer-events:none
+}
+.project-card:hover::before,
+.skill-item:hover::before{
+    opacity:1
+}
+.project-card > *,
+.skill-item > *{
+    position:relative;
+    z-index:1
+}
+@media (hover: none){
+    .project-card::before,
+    .skill-item::before{
+        display:none
     }
 }
