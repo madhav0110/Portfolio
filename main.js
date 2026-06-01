@@ -243,3 +243,29 @@ document.addEventListener("DOMContentLoaded", () => {
     contactFormStatus.textContent = "Formspree is unavailable. Please replace the placeholder form ID or EmailJS IDs.";
   });
 });
+
+function initSpotlightEffect(selector) {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const cards = document.querySelectorAll(selector);
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--mouse-x', '-999px');
+      card.style.setProperty('--mouse-y', '-999px');
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSpotlightEffect('.project-card');
+  initSpotlightEffect('.skill-item');
+});
