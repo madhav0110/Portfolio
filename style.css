@@ -1777,6 +1777,39 @@ footer{
     font-size:1.6rem;
     line-height:1.6
 }
+.patent-btn-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:14px;
+    align-items:center
+}
+.patent-btn-row .patent-journal-link{
+    margin-top:0
+}
+.patent-pdf-link{
+    display:inline-block;
+    font-size:12px;
+    font-weight:500;
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:8px;
+    transition:background .2s ease,color .2s ease;
+    color:#5eead4;
+    background:rgba(20, 184, 166, .1);
+    border:1px solid rgba(20, 184, 166, .25)
+}
+.patent-pdf-link:hover{
+    background:rgba(20, 184, 166, .18)
+}
+.light-mode .patent-pdf-link{
+    color:#0f766e;
+    background:rgba(20, 184, 166, .08);
+    border:1px solid rgba(20, 184, 166, .25)
+}
+.light-mode .patent-pdf-link:hover{
+    background:rgba(20, 184, 166, .16)
+}
 .patent-journal-link{
     display:inline-block;
     align-self:flex-start;
