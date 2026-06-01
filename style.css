@@ -1593,3 +1593,199 @@ footer{
         gap:20px
     }
 }
+
+.section-content-width{
+    width:60%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center
+}
+.experience-section-container,.patents-section-container{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+.experience-section-container{
+    padding-top:150px
+}
+.patents-section-container{
+    padding-top:120px
+}
+.experience-timeline{
+    width:100%;
+    margin-top:50px;
+    padding-left:35px;
+    border-left:2px solid var(--color-light-purple);
+    display:flex;
+    flex-direction:column;
+    gap:35px
+}
+.experience-card{
+    width:100%;
+    position:relative
+}
+.timeline-dot{
+    position:absolute;
+    left:-45px;
+    top:34px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--color-light-blue),var(--color-light-purple));
+    border:3px solid var(--color-dark-mode);
+    box-shadow:0 0 0 3px rgba(128,0,255,.22)
+}
+.experience-card-content,.patent-card,.contact-form{
+    background-image:linear-gradient(to bottom right,var(--tech-stack-box-first-color),var(--tech-stack-box-second-color));
+    border:1px solid var(--tech-stack-box-border-color);
+    border-radius:24px
+}
+.experience-card-content{
+    padding:30px
+}
+.experience-card-content h3,.patent-card h3{
+    color:var(--color-white);
+    font-size:2.4rem;
+    font-weight:700
+}
+.experience-role{
+    color:var(--color-light-blue);
+    font-size:1.8rem;
+    margin-top:8px
+}
+.experience-period,.patent-badge{
+    color:gray;
+    font-size:1.5rem;
+    margin-top:8px
+}
+.experience-card-content ul{
+    margin-top:20px;
+    padding-left:20px;
+    color:gray;
+    font-size:1.6rem;
+    line-height:1.7
+}
+.patent-cards{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:30px;
+    margin-top:50px
+}
+.patent-card{
+    padding:30px
+}
+.patent-badge{
+    display:inline-flex;
+    padding:8px 12px;
+    border-radius:999px;
+    border:1px solid var(--tech-stack-box-border-color);
+    background:rgba(128,0,255,.08)
+}
+.patent-card p:last-child{
+    color:gray;
+    font-size:1.6rem;
+    line-height:1.6;
+    margin-top:18px
+}
+.ProjectTech{
+    color:var(--color-light-blue);
+    font-size:1.45rem;
+    font-weight:600;
+    letter-spacing:.04em
+}
+.contact-form{
+    width:min(620px,90%);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    padding:24px;
+    margin:10px 0 25px
+}
+.contact-field-row{
+    display:flex;
+    flex-direction:column;
+    gap:7px
+}
+.contact-field-row label{
+    color:#b3b3b3;
+    font-family:fira code;
+    font-size:1.4rem
+}
+.contact-field-row input,.contact-field-row textarea{
+    width:100%;
+    border:1px solid var(--tech-stack-box-border-color);
+    border-radius:12px;
+    background:rgba(11,11,11,.55);
+    color:white;
+    font-size:1.5rem;
+    padding:13px 15px;
+    outline:none;
+    resize:vertical;
+    user-select:text
+}
+.contact-field-row input:focus,.contact-field-row textarea:focus{
+    border-color:var(--color-light-purple);
+    box-shadow:0 0 0 3px rgba(128,0,255,.18)
+}
+.contact-form button{
+    align-self:flex-start;
+    border:none;
+    border-radius:999px;
+    padding:12px 28px;
+    background:linear-gradient(90deg,var(--color-light-blue),var(--color-light-purple));
+    color:#0b0b0b;
+    font-size:1.6rem;
+    font-weight:700;
+    cursor:pointer
+}
+.contact-form-status{
+    min-height:18px;
+    color:#b3b3b3;
+    font-size:1.3rem
+}
+@media screen and (max-width:1200px){
+    .section-content-width{
+        width:80%
+    }
+    .patent-cards{
+        grid-template-columns:1fr
+    }
+}
+@media screen and (max-width:768px){
+    .experience-timeline{
+        padding-left:25px
+    }
+    .timeline-dot{
+        left:-35px
+    }
+    .contact-form{
+        width:95%
+    }
+}
+@media screen and (max-width:430px){
+    .section-content-width{
+        width:80%
+    }
+    .experience-card-content,.patent-card{
+        padding:22px
+    }
+}
+.footer-background,.footer-foreground{
+    min-height:1050px
+}
+@media screen and (max-width:768px){
+    .footer-background,.footer-foreground{
+        min-height:1100px
+    }
+}
+.navbar-tabs-ul{
+    gap:36px
+}
+@media screen and (max-width:1400px){
+    .navbar-tabs-ul{
+        gap:28px
+    }
+}
